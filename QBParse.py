@@ -10,7 +10,7 @@ def QBStats():
     #df.to_csv('../NFLDB/test.csv',index=False)
 
     print(df.loc[df['Team'].isin(['QB vs Falcons'])].to_string(index=False))
-    print(df1[(df1['Player'] == 'Cam Newton') & (df1['SPLIT'] == 'VS. ATL')])
+    print(df1[(df1['Player'] == 'Cam Newton') & (df1['SPLIT'] == 'VS. ATL')].to_string(index=False))
 
     #print(df.to_string(index=False))
 
