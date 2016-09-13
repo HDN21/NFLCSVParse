@@ -32,10 +32,10 @@ def readMaddenRatings():
 
 def combineDepthWithMadded(df1,df2):
 
-    df1['Last Name'] = df1['Last Name'].str.lower()
-    df1['First Name'] = df1['First Name'].str.lower()
-    df2['Last Name'] = df2['Last Name'].str.lower()
-    df2['First Name'] = df2['First Name'].str.lower()
+    df1['Last Name'] = df1['Last Name'].str.upper()
+    df1['First Name'] = df1['First Name'].str.upper()
+    df2['Last Name'] = df2['Last Name'].str.upper()
+    df2['First Name'] = df2['First Name'].str.upper()
 
     df3 = pd.merge(df1,df2,on=['Team','Last Name','First Name'])
 
