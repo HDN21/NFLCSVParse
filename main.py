@@ -18,7 +18,12 @@ def main():
 
     #print(DepthChartParser.retrieveDepthCharts())
 
-    DepthChartParser.retrieveDepthCharts()
+    df1 = DepthChartParser.retrieveDepthCharts()
+    df2 = DepthChartParser.readMaddenRatings()
+
+    df3 = DepthChartParser.combineDepthWithMadded(df1,df2)
+
+    df3.to_string(index=False)
     
 if __name__ == "__main__":
     main()

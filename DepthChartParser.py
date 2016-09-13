@@ -11,10 +11,34 @@ def retrieveDepthCharts():
     df2 = df.dropna()
     df2 = df2.ix[1:]
 
-    df2['Starter'].replace({'\s[A-Za-z\d\/]*$':''}, regex=True,inplace=True)
-    df2['Second'].replace({'\s[A-Za-z\d\/]*$':''}, regex=True,inplace=True)
+    df2['Starter'].replace({'\s[A-Za-z\d\/]*$':''},regex=True,inplace=True)
+    #df2['Second'].replace({'\s[A-Za-z\d\/]*$':''}, regex=True,inplace=True)
 
-    print(df2.head(5).to_string(index=False))
+    df2['Last Name'],df2['First Name'] = zip(*df2['Starter'].map(lambda x:x.split(', ')))
+    #df2['SecondLastName'],df2['SecondFirstName'] = zip(*df2['Second'].map(lambda x:x.split(', ')))
 
-    return(df2.head(32).to_string(index=False))
+    df3 = df2[['Team','Position','Last Name','First Name']]
 
+    #print(df3)
+
+    return(df3)
+
+def readMaddenRatings():
+
+    df = pd.read_csv('NFLDB/madden17ratings.csv')
+    df1 = df[['Team','Last Name','First Name','Overall']]
+
+    return(df1)
+
+def combineDepthWithMadded(df1,df2):
+
+    df1['Last Name'] = df1['Last Name'].str.lower()
+    df1['First Name'] = df1['First Name'].str.lower()
+    df2['Last Name'] = df2['Last Name'].str.lower()
+    df2['First Name'] = df2['First Name'].str.lower()
+
+    df3 = pd.merge(df1,df2,on=['Team','Last Name','First Name'])
+
+    df3.to_csv('out.csv',index=False)
+
+    return(df3)
