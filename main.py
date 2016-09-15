@@ -1,4 +1,5 @@
 import DepthChartParser
+import chartingNFLStats
 import pandas as pd
 from pandas import DataFrame, Series
 
@@ -18,12 +19,17 @@ def main():
 
     #print(DepthChartParser.retrieveDepthCharts())
 
-    df1 = DepthChartParser.retrieveDepthCharts()
-    df2 = DepthChartParser.readMaddenRatings()
+    # df1 = DepthChartParser.retrieveDepthCharts()
+    # df2 = DepthChartParser.readMaddenRatings()
+    #
+    # df3 = DepthChartParser.combineDepthWithMadded(df1,df2)
+    #
+    # df4 = DepthChartParser.returnMatchUp(df3)
 
-    df3 = DepthChartParser.combineDepthWithMadded(df1,df2)
+    df = pd.read_csv('week1matchup.csv')
+    df1 = df.set_index('Team')
 
-    df3.to_string(index=False)
-    
+    chartingNFLStats.chartOffvsDef(df1)
+
 if __name__ == "__main__":
     main()
